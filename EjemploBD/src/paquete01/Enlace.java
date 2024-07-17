@@ -47,6 +47,9 @@ public class Enlace {
         try{  
             establecerConexion();
             Statement statement = obtenerConexion().createStatement();
+            /*
+            Ciudad --> Es el NOMBRE de la TABLA que esta creada en la base de datos
+            */
             String data = String.format("INSERT INTO Ciudad (nombre, poblacion) "
                     + "values ('%s', %d)", ciudad.obtenerNombre(), 
                     ciudad.obtenerPoblacion());
@@ -68,6 +71,16 @@ public class Enlace {
             
             ResultSet rs = statement.executeQuery(data);
             while(rs.next()){
+                /*
+                En el objeto miCiudad de tipo Ciudad al igual que la clase principal
+                    al momento de enviar un arreglo, lo que hago aqui es recorrer la 
+                    base de datos y en cada registro enviarlo al objeto miCiudad 
+                    de tipo Ciudad para ello debo poner
+                rs --> que es del ResultSet 
+                y ademas luego de eso
+                .getString/Int --> primero get que es obtener seguido del tipo de dato
+                        que se tiene en la base de datos
+                */
                 Ciudad miCiudad = new Ciudad(rs.getString("nombre"),
                 rs.getInt("poblacion"));
                 lista.add(miCiudad);
